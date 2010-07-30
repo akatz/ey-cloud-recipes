@@ -91,7 +91,7 @@ if ['solo', 'app', 'app_master'].include?(node[:instance_role])
           end
 
           execute "chown_sphinx" do
-          command "chown #{node[:owner_name]}:#{node[:owner_name]} -R /data/sphinx"
+          # command "chown #{node[:owner_name]}:#{node[:owner_name]} -R /data/sphinx"
         end
 
           execute "sphinx config" do
