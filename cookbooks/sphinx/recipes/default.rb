@@ -60,7 +60,7 @@ if ['solo', 'app', 'app_master'].include?(node[:instance_role])
             group node[:owner_name]
             mode 0755
           end
-          execute "ln -sfv /data/#{app.name}/shared/config/#{flavor.split("_").join("")}/ /data/#{app.name}/current/config/} " do 
+          execute "ln -sfv /data/#{app.name}/shared/config/#{flavor.split("_").join("")}/ /data/#{app.name}/current/config/#{flavor.split("_").join("")}/} " do 
             action :run 
           end
           remote_file "/etc/logrotate.d/sphinx" do
