@@ -101,8 +101,8 @@ if ['solo', 'app', 'app_master'].include?(node[:instance_role])
         #   # command "chown #{node[:owner_name]}:#{node[:owner_name]} -R /data/sphinx"
         # end
           execute "log rake taks" do
-            command "rake -T"
-            cwd "/data/#{app.name}/current >> /tmp/rake_tasks.out"
+            command "rake -T >> /tmp/rake_tasks.out"
+            cwd "/data/#{app.name}/current "
           end
           execute "sphinx config" do
             
