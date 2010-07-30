@@ -55,7 +55,14 @@ if ['solo', 'app', 'app_master'].include?(node[:instance_role])
             group node[:owner_name]
             mode 0755
           end
-
+          directory "/data/#{app.name}/shared/config/#{flavor.split("_").join("")}" do
+            owner node[:owner_name]
+            group node[:owner_name]
+            mode 0755
+          end
+          execute "ln -sfv /data/#{app.name}/shared/config/#{flavor.split("_").join("")}/ /data/#{app.name}/current/config/} " do 
+            action :run 
+          end
           remote_file "/etc/logrotate.d/sphinx" do
             owner "root"
             group "root"
@@ -90,9 +97,9 @@ if ['solo', 'app', 'app_master'].include?(node[:instance_role])
             })
           end
 
-          execute "chown_sphinx" do
-          # command "chown #{node[:owner_name]}:#{node[:owner_name]} -R /data/sphinx"
-        end
+        #   execute "chown_sphinx" do
+        #   # command "chown #{node[:owner_name]}:#{node[:owner_name]} -R /data/sphinx"
+        # end
 
           execute "sphinx config" do
             command "rake #{flavor}:configure"
